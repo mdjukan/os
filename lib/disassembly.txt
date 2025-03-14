@@ -1,0 +1,93 @@
+
+putget.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text:
+
+0000000000000000 <__putc>:
+   0:	fe010113          	addi	sp,sp,-32
+   4:	00813823          	sd	s0,16(sp)
+   8:	00113c23          	sd	ra,24(sp)
+   c:	02010413          	addi	s0,sp,32
+  10:	00050793          	mv	a5,a0
+  14:	fef40593          	addi	a1,s0,-17
+  18:	00100613          	li	a2,1
+  1c:	00000513          	li	a0,0
+  20:	fef407a3          	sb	a5,-17(s0)
+  24:	00000097          	auipc	ra,0x0
+  28:	000080e7          	jalr	ra # 24 <__putc+0x24>
+  2c:	01813083          	ld	ra,24(sp)
+  30:	01013403          	ld	s0,16(sp)
+  34:	02010113          	addi	sp,sp,32
+  38:	00008067          	ret
+
+000000000000003c <__getc>:
+  3c:	fe010113          	addi	sp,sp,-32
+  40:	00813823          	sd	s0,16(sp)
+  44:	00113c23          	sd	ra,24(sp)
+  48:	02010413          	addi	s0,sp,32
+  4c:	fe840593          	addi	a1,s0,-24
+  50:	00100613          	li	a2,1
+  54:	00000513          	li	a0,0
+  58:	00000097          	auipc	ra,0x0
+  5c:	000080e7          	jalr	ra # 58 <__getc+0x1c>
+  60:	fe844503          	lbu	a0,-24(s0)
+  64:	01813083          	ld	ra,24(sp)
+  68:	01013403          	ld	s0,16(sp)
+  6c:	02010113          	addi	sp,sp,32
+  70:	00008067          	ret
+
+0000000000000074 <console_handler>:
+  74:	fe010113          	addi	sp,sp,-32
+  78:	00813823          	sd	s0,16(sp)
+  7c:	00113c23          	sd	ra,24(sp)
+  80:	00913423          	sd	s1,8(sp)
+  84:	02010413          	addi	s0,sp,32
+  88:	14202773          	csrr	a4,scause
+  8c:	100027f3          	csrr	a5,sstatus
+  90:	0027f793          	andi	a5,a5,2
+  94:	06079e63          	bnez	a5,110 <.L17>
+  98:	00074c63          	bltz	a4,b0 <.L18>
+
+000000000000009c <.L6>:
+  9c:	01813083          	ld	ra,24(sp)
+  a0:	01013403          	ld	s0,16(sp)
+  a4:	00813483          	ld	s1,8(sp)
+  a8:	02010113          	addi	sp,sp,32
+  ac:	00008067          	ret
+
+00000000000000b0 <.L18>:
+  b0:	0ff77713          	zext.b	a4,a4
+  b4:	00900793          	li	a5,9
+  b8:	fef712e3          	bne	a4,a5,9c <.L6>
+  bc:	00000097          	auipc	ra,0x0
+  c0:	000080e7          	jalr	ra # bc <.L18+0xc>
+  c4:	00a00793          	li	a5,10
+  c8:	00050493          	mv	s1,a0
+  cc:	02f50c63          	beq	a0,a5,104 <.L19>
+  d0:	fc0506e3          	beqz	a0,9c <.L6>
+  d4:	00050593          	mv	a1,a0
+  d8:	00000517          	auipc	a0,0x0
+  dc:	00050513          	mv	a0,a0
+  e0:	00000097          	auipc	ra,0x0
+  e4:	000080e7          	jalr	ra # e0 <.L18+0x30>
+
+00000000000000e8 <.L12>:
+  e8:	01013403          	ld	s0,16(sp)
+  ec:	01813083          	ld	ra,24(sp)
+  f0:	00048513          	mv	a0,s1
+  f4:	00813483          	ld	s1,8(sp)
+  f8:	02010113          	addi	sp,sp,32
+  fc:	00000317          	auipc	t1,0x0
+ 100:	00030067          	jr	t1 # fc <.L12+0x14>
+
+0000000000000104 <.L19>:
+ 104:	00000097          	auipc	ra,0x0
+ 108:	000080e7          	jalr	ra # 104 <.L19>
+ 10c:	fddff06f          	j	e8 <.L12>
+
+0000000000000110 <.L17>:
+ 110:	00000517          	auipc	a0,0x0
+ 114:	00050513          	mv	a0,a0
+ 118:	00000097          	auipc	ra,0x0
+ 11c:	000080e7          	jalr	ra # 118 <.L17+0x8>

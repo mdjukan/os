@@ -1,7 +1,10 @@
 #include "../lib/console.h"
 
 void main() {
-	__putc('a');
-	__putc('\n');
+	while (true)
+	{
+		const char c = __getc();
+		__putc(c);
+	}
 	return;
 }

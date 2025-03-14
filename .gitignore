@@ -1,0 +1,21 @@
+# Ignore LaTeX files
+*.tex
+*.dvi
+*.idx
+*.aux
+*.log
+*.ind
+*.ilg
+
+# Ignore kernel files
+kernel
+kernel.asm
+
+# Ignore build directory
+build/
+
+# Ignore GDB initialization file
+.gdbinit
+
+# Ignore CLion data
+.idea/
