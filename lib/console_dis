@@ -1,3 +1,4 @@
+In archive console.lib:
 
 putget.o:     file format elf64-littleriscv
 
@@ -57,7 +58,7 @@ Disassembly of section .text:
   ac:	00008067          	ret
 
 00000000000000b0 <.L18>:
-  b0:	0ff77713          	zext.b	a4,a4
+  b0:	0ff77713          	andi	a4,a4,255
   b4:	00900793          	li	a5,9
   b8:	fef712e3          	bne	a4,a5,9c <.L6>
   bc:	00000097          	auipc	ra,0x0
